@@ -1,3 +1,6 @@
+// Import java.time.LocalDateTime;
+
+
 public class Main {
     public static void main(String[] args) {
 int x = 7;
@@ -16,7 +19,7 @@ int x = 7;
       );
       flipNHeads((int)(Math.random()*10));
 
-      clocks();
+    //   clocks();
   
 
     //   int count=3;
@@ -66,23 +69,31 @@ int x = 7;
                     }while(hCount<c);
                     System.out.println( "It took "+ totalCount+" flips to flip "+c+ " heads in a row.");
                         }
+
+
                
-                        public static void clocks(){
-                            while (true)
-        {
+//                         public static void clocks(){
+
+              
+//                             while (true)
+//         {
+//             // if (second==59){
+
+//             // }
+//                int hour = now.getHour();
+//  int minute = now.getMinute();
+//  int second = now.getSecond();
 //   LocalDateTime now = LocalDateTime.now();
 
-// //  int hour = now.getHour();
-// //  int minute = now.getMinute();
-// //  int second = now.getSecond();
-// //  // or, if you're feeling fancy
+
+
 
 //  String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-// //  System.out.println(hour+":"+minute+":"+second);
+//  System.out.println(hour+":"+minute+":"+second);
 
 // System.out.println(time);
-        }
-    }
+//         }
+//     }
 
 
 }
