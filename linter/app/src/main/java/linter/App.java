@@ -19,14 +19,15 @@ public class App {
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
         File file=new File("gates.js");
-        Scanner scanner=new Scanner("gates.js");
+        Scanner scanner=new Scanner(Scanner"gates.js");
+        Scanner scan = new Scanner(new File("gates.js"));
+
         while (scanner.hasNextLine()){
-          String s=scanner.nextLine();
+//          String s=scanner.nextLine();
 //System.out.println(s);
 //             String   line = s.readLine();
 
 //        Path path = Paths.get(s);
-//            Paths.get(getClass().getResource("gates.js").toURI()).toString();
         }
 
 
