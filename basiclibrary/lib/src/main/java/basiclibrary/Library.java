@@ -9,11 +9,6 @@ public class Library {
         return true;
     }
 
-    //    int n=4;
-//    roll (n);
-//    int[] arrDub={3, 2, 1, 5,2};
-//    containsDuplicates (arrDub);
-
     public static  ArrayList roll (int n){
         ArrayList<Integer>listOfNumbers=new ArrayList<>();
 
@@ -41,25 +36,22 @@ public class Library {
 
 
     public static double avg (int[]arr){
-        // ArrayList<Integer>listOfNumbers=new ArrayList<>();
         double sum=0.0;
-
         for( int i=0;i<=arr.length-1;i++){
-            // listOfNumbers.add((int)(Math.random()*6)+1);
             sum=sum+(double)arr[i];
         }
-        System.out.println(sum);
-
-        System.out.println(sum/arr.length);
+//        System.out.println(sum);
+//        System.out.println(sum/arr.length);
         return sum/arr.length;
     }
-    public static int sumMatrix(int [][]arr){
+    public static int lowestAverage(int [][]arr){
         ArrayList<Integer>listOfAvg=new ArrayList<>();
-// int newSum=0;
         int sum=0;
         int avg=0;
         int lowestAvg=0;
-        for (int i=0;i< arr.length;i++){
+        int index=0;
+        int i=0;
+        for (i=0;i< arr.length;i++){
             for (int j=0;j< arr[i].length;j++){
                 sum=sum+arr[i][j];
                 listOfAvg.add(arr[i][j]);
@@ -67,24 +59,16 @@ public class Library {
             avg=sum/arr[i].length;
             System.out.println(sum);
             if(i==0){lowestAvg=avg;}
+            if(avg<lowestAvg){lowestAvg=avg;index=i;
 
-
-            if(avg<lowestAvg){lowestAvg=avg;
-//  for (int j=0;j< arr[i].length-1;j++){
-//  listOfAvg.indexOf(j)=arr[i][j];
-//                  System.out.println(listOfAvg);
-
-//         }//end intern
             }
+
             sum=0;
             avg=0;
         }// end external for
-        // System.out.println(sum);
         System.out.println(lowestAvg);
-        // System.out.println(listOfAvg);
-
-        return lowestAvg;
-        // return listOfAvg;
+        System.out.println("index="+index);
+        return index;
     }
 
 }

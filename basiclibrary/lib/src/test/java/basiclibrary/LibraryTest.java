@@ -21,14 +21,22 @@ public class LibraryTest {
         Library rollClassUnderTest = new Library();
         ArrayList<Integer> rollArray= rollClassUnderTest.roll(4);
 
-//        assertEquals("The first item is equal to 5","5",reversed.get(3));
+        boolean checkValue=true;
+        for(int i=0;i<4;i++){
+            if(rollArray.get(i)>=1 &&rollArray.get(i)<=6){
+               checkValue=true;
+            }else checkValue=false;
+        }
+        System.out.println(rollArray);
+        System.out.println("all numbers between[1-6] :"+checkValue);
+        System.out.println("size of array:"+rollArray.size());
 
-//        assertEquals("Both sizes are the same",4, rollArray.size());
-        assertEquals("Both sizes are the same", rollArray.size(),4);
+assertTrue(checkValue);
+        assertEquals("Both sizes are the same", 4,rollArray.size());
 
     }
     @Test
-    public void testcontainsDuplicates() {
+    public void testContainsDuplicates() {
 
         Library containsDuplicatesTest = new Library();
         int []arr={1,2,1};
@@ -40,26 +48,28 @@ public class LibraryTest {
     public void testAvg(){
         Library avgClassUnderTest = new Library();
         int[]array={2,3,8,5};
-//        Double average= 4.5;
-
-//        assertEquals("The first item is equal to 5","5",reversed.get(3));
-//        assertEquals("the expected average is right'4.5'",4.5,avgClassUnderTest.avg(array));
-assertEquals("the expected average is right",4.5d,avgClassUnderTest.avg(array));
+        double average= 4.5;
+        System.out.println("The average value is : "+avgClassUnderTest.avg(array));
+assertTrue("The average value is 4.5",average==avgClassUnderTest.avg(array));
     }
     @Test
-    public void testSum(){
-        int a[][] = {
-                {1, 2, 3},//i=0
-                {4, 5, 6},
-                {7, 8, 9}
+    public void testLowestAverage(){
+        int[][] weeklyMonthTemperatures = {
+                {66, 64, 58, 65, 71, 57, 60},
+                {57, 65, 65, 70, 72, 65, 51},
+                {55, 54, 60, 53, 59, 57, 61},
+                {65, 56, 55, 52, 55, 62, 57}
         };
-        int result=45;
-        Library sumClassUnderTest = new Library();
-        int sum = sumClassUnderTest.sumMatrix(a);
+//        int result=45;
+        Library classUnderTest = new Library();
+        int lowest = classUnderTest.lowestAverage(weeklyMonthTemperatures);
 //        System.out.println(a[0]);
-        System.out.println(sum);
-assertEquals("sum is correct",2,sum);
-//        assertEquals("the expected lowest average is '2'",2,sumClassUnderTest.sumMatrix(a));
+        System.out.println("index for the lowest average array is"+lowest);
+        System.out.println("the lowest average is :"+classUnderTest.avg(weeklyMonthTemperatures[lowest]));
+
+        assertEquals("the lowest average array is",57,classUnderTest.avg(weeklyMonthTemperatures[lowest]),0);
+
+        assertEquals("the index for the lowest average array is",2,lowest);
 
     }
 
