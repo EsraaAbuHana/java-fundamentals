@@ -16,56 +16,48 @@ public class App {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        File file=new File("gates.js");
-        Scanner scanner=new Scanner(Scanner"gates.js");
-        Scanner scan = new Scanner(new File("gates.js"));
+public static void main(String[] args) {
+    //        System.out.println(new App().getGreeting());
 
-        while (scanner.hasNextLine()){
-//          String s=scanner.nextLine();
-//System.out.println(s);
-//             String   line = s.readLine();
+    Path path = Paths.get("../resources/gates.js");
 
-//        Path path = Paths.get(s);
+    System.out.print(linter(path));
+}
+    public static String linter(Path path) {
+        String errorsLines="";
+        BufferedReader reader = null;
+
+
+        try {
+            reader = Files.newBufferedReader(path);
+            String line = reader.readLine();
+            int lineNumber=1;
+            while (line != null) {
+                if(line.isEmpty() ||  line.endsWith("{") || line.endsWith("}") || line.contains("if") || line.contains("else")|| line.endsWith(";") ){
+                }
+                else {
+                    errorsLines = errorsLines +"Line "+lineNumber+ ": Missing semicolon."+"\n";
+
+                }
+                lineNumber++;
+                line = reader.readLine();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return errorsLines;
         }
 
 
 
-        BufferedReader reader = null;
-        // option 2
-//
-//        try {
-//            reader = Files.newBufferedReader(path);
-//            String line = reader.readLine();
-//
-//            while(line != null){
-//                System.out.println("- "+line);
-//                line = reader.readLine();
-//            }
-//        } catch (IOException ex){
-//            ex.printStackTrace();
-//        } finally {
-//            if(reader != null) {
-//                try {
-//                    reader.close();
-//                } catch(IOException e){
-//                    System.out.println("an error occurred while closing the file");
-//                }
-//            }
-//        }
 
     }
 }
-//java.nio.file.NoSuchFileException: resources/gates.js
-//        at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
-//        at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
-//        at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
-//        at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:214)
-//        at java.nio.file.Files.newByteChannel(Files.java:361)
-//        at java.nio.file.Files.newByteChannel(Files.java:407)
-//        at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
-//        at java.nio.file.Files.newInputStream(Files.java:152)
-//        at java.nio.file.Files.newBufferedReader(Files.java:2784)
-//        at java.nio.file.Files.newBufferedReader(Files.java:2816)
-//        at linter.App.main(App.java:24)
