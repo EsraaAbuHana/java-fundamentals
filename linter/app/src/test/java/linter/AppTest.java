@@ -4,11 +4,47 @@
 package linter;
 
 import org.junit.Test;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import static org.junit.Assert.*;
 
 public class AppTest {
     @Test public void testAppHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    }
+    @Test public void testCheckLine() {
+        App classUnderTest = new App();
+//        You’ll need to create a JS file that will test each of these things!
+//
+//                Test the linter on a file that contains no errors.
+//                Test the linter on a file that contains one error.
+//                Test the linter on a file that contains few errors.
+//                Test the linter on a file that contains many errors.
+//                Test the linter on an empty file.
+        String expectedForFewErrors = "Line 7: Missing semicolon.\n" +
+                "Line 27: Missing semicolon.\n" +
+                "Line 71: Missing semicolon.\n" +
+                "Line 77: Missing semicolon.\n";
+
+        Path pathWithErrors = Paths.get("../resources/gates.js");
+        Path pathWithNoError = Paths.get("../resources/gatesNoError.js");
+        Path pathWithFewErrors = Paths.get("../resources/gatesWithSomeErrors.js");
+        Path pathWithOneError = Paths.get("../resources/gatesWithOneError.js");
+
+
+
+        String expected =classUnderTest.linter(pathWithErrors);
+        String pathWithoutErrors =classUnderTest.linter(pathWithNoError);
+        String pathWitFewErrors =classUnderTest.linter(pathWithFewErrors);
+
+        System.out.println("NO  Output for path With No Errors"+classUnderTest.linter(pathWithNoError));
+        System.out.println("The Expected Output for path With Few Errors"+classUnderTest.linter(pathWithFewErrors));
+        System.out.println("The Expected Output for path With One Error"+classUnderTest.linter(pathWithOneError));
+
+//assertTrue(true);
+assertFalse(expected==pathWithoutErrors);
+assertEquals(expectedForFewErrors,classUnderTest.linter(pathWithFewErrors));
+assertEquals("Line 8: Missing semicolon.\n",classUnderTest.linter(pathWithOneError));
     }
 }
