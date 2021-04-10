@@ -7,5 +7,12 @@
  * in the user manual at https://docs.gradle.org/6.8.3/userguide/multi_project_builds.html
  */
 
+<<<<<<< HEAD:linter/settings.gradle
+rootProject.name = 'linter'
+=======
 rootProject.name = 'basics'
+<<<<<<< HEAD:linter/settings.gradle
+>>>>>>> d3aab75ef3fe5ad71e3d74ea43b867c667900d43:basics/settings.gradle
+=======
+>>>>>>> d3aab75ef3fe5ad71e3d74ea43b867c667900d43:basics/settings.gradle
 include('app')
