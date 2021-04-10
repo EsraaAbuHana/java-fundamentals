@@ -42,7 +42,7 @@ assertTrue(checkValue);
         int []arr={1,2,1};
         assertTrue("the array has duplicate elements 'true'",containsDuplicatesTest.containsDuplicates(arr));
 
-    }//end testContainsDuplicates()
+    }//end testcontainsDuplicates()
 
     @Test
     public void testAvg(){
@@ -60,7 +60,6 @@ assertTrue("The average value is 4.5",average==avgClassUnderTest.avg(array));
                 {55, 54, 60, 53, 59, 57, 61},
                 {65, 56, 55, 52, 55, 62, 57}
         };
-
 //        int result=45;
         Library classUnderTest = new Library();
         int lowest = classUnderTest.lowestAverage(weeklyMonthTemperatures);
