@@ -4,6 +4,9 @@
 package inheritance;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class LibraryTest {
@@ -13,39 +16,74 @@ public class LibraryTest {
     }
 @Test
     public void testRestaurant(){
-    Library classUnderTest = new Library();
-    Restaurant restaurant1=new Restaurant();
-
-    restaurant1.name="BB";
-    restaurant1.priceCategory="$$";
-    restaurant1.numberOfStars=5;
+//    Library classUnderTest = new Library();
+    Restaurant restaurant1=new Restaurant("Esraa",8,"$$$");
+    restaurant1.addReview("Batool",9);
 //    restaurant1.toString();
     System.out.println(restaurant1.toString());
-    String expectedOutcome="Restaurant Name Is: BB\n" +
-            "Restaurant Rate Is: 5\n" +
-            "Restaurant Price Category Is: $$\n";
-//    assertTrue(true);
-    assertEquals(expectedOutcome,restaurant1.toString());
+    assertEquals("Restaurant Name Is: Esraa\n" +
+            "Restaurant Rate Is: 8\n" +
+            "Restaurant Price Category Is: $$$\n" +
+            "[The Review Is: Restaurant New Given  Rate Is: 9\n" +
+            "Reviewed by : Batool\n" +
+            "]",    restaurant1.toString());
+
     }
 
 @Test
     public void testReview(){
-        //review
+//        //review
     Review review1=new Review();
-    review1.body= "very good";
-    review1.author= "me";
-    review1.numberOfStars= 5;
-    review1.numberOfStarsGiven= 5;
-    review1.name= "BB";
-    review1.priceCategory= "$$";
-//    review1.toString();
-    String expectedOutcome="Restaurant Name Is: BB\n" +
-            "Restaurant Rate Is: 5\n" +
-            "Restaurant Price Category Is: $$\n" +
-            "Restaurant New Given  Rate Is: 5\n" +
-            "Reviewed by : me\n" +
-            "Review Is : very good";
-    assertEquals(expectedOutcome,review1.toString());
-//    assertTrue(true);
+    review1.numberOfStarsGiven=7;
+    review1.author="groot";
+    review1.toString();
+//    System.out.println(review1.toString());
+//    assertEquals("Restaurant New Given  Rate Is: 7\n" +
+//            "Reviewed by : groot",review1.toString() );
+    assertEquals("Restaurant New Given  Rate Is: 7\n" +
+            "Reviewed by : groot\n",review1.toString());
+    assertTrue(true);
 }
+
+@Test
+public void testShop(){
+Shop shop1=new Shop("classy","gift shop","$$$");
+    System.out.println(shop1.toString());
+//    assertTrue(true);
+    assertEquals("Shop Name Is: classy\n" +
+            "Description: gift shop\n" +
+            "Shop Price Category Is: $$$\n",shop1.toString());
+        }
+        @Test
+    public void testTheater(){
+            ArrayList<String>theaterList=new ArrayList<>();
+            Theater theater=new Theater("My PC",theaterList);
+
+            theaterList.add("12 angry men");
+            theaterList.add("pay it forward");
+            theater.addMovie("Beautiful Mind");
+            theater.addMovie("Bee");
+            theater.removeMovie("pay it forward");
+            theater.toString();
+            System.out.println(theater.toString());
+//            assertEquals("[12 angry men, pay it forward, Beautiful Mind, Bee]",theater.toString());
+//            assertEquals("[12 angry men, Beautiful Mind, Bee]",theater.toString());
+
+            assertTrue(true);
+        }
+        @Test
+    public void testMoviesReview(){
+            ArrayList<String>theaterList=new ArrayList<>();
+            Theater theater=new Theater("My PC",theaterList);
+            theaterList.add("12 angry men");
+            theaterList.add("pay it forward");
+            theater.addMovie("Beautiful Mind");
+            theater.removeMovie("pay it forward");
+            theater.addReview("groot",8,"Bee");
+            assertEquals("Bee Has A New Review : Bee Has a New Review From groot\n" +
+                    "Rate is: 8",theater.addReview("groot",8,"Bee"));
+            assertTrue(true);
+
+
+        }
 }
