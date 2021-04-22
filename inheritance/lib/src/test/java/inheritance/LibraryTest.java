@@ -6,84 +6,116 @@ package inheritance;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+
+    Restaurant testRestaurant = new Restaurant("BBQ", "$$$");
+
+
+    Review testReview = new Review("great service", "ESRAA", 5);
+    Review review1 = new Review("bad", "batool", 1, testRestaurant);
+    Review review2 = new Review("yummy food", "osama", 3, testRestaurant);
+    Shop test = new Shop("pretty", "gift store", "$$");
+    Review rev = new Review("good shop", "Faisal", 3);
+    @Test
+    public void testRestaurantConstructor() {
+        assertNotNull( testRestaurant);
+        assertEquals(2.0, testRestaurant.stars, 0.0);
+        assertEquals("BBQ", testRestaurant.name);
+        assertEquals("$$$", testRestaurant.priceCategory);
+        assertEquals(2, testRestaurant.reviews.size());
     }
-//@Test
-//    public void testRestaurant(){
-////    Library classUnderTest = new Library();
-//    Restaurant restaurant1=new Restaurant("Esraa",8,"$$$");
-//    restaurant1.addReview("Batool",9);
-////    restaurant1.toString();
-//    System.out.println(restaurant1.toString());
-//    assertEquals("Restaurant Name Is: Esraa\n" +
-//            "Restaurant Rate Is: 8\n" +
-//            "Restaurant Price Category Is: $$$\n" +
-//            "[The Review Is: Restaurant New Given  Rate Is: 9\n" +
-//            "Reviewed by : Batool\n" +
-//            "]",    restaurant1.toString());
-//
+
+    @Test
+    public void testAddReviewRestaurant() {
+
+        testRestaurant.addReview(testReview);
+        testRestaurant.addReview(testReview);
+        testRestaurant.addReview(review1);
+        assertEquals(3.0, testRestaurant.stars, 0.0);
+        assertEquals(5, testRestaurant.reviews.size());
+        assertEquals("Restaurant Name Is: BBQ\n" +
+                "Restaurant Rate Is: 3.0\n" +
+                "Restaurant Price Category Is: $$$\n" +
+                "5", testRestaurant.toString());
+
+        assertEquals(3.0, testRestaurant.stars, 0.0);
+        assertEquals(5, testRestaurant.reviews.size());
+        assertTrue(testRestaurant.reviews.contains(testReview));
+        assertTrue(testRestaurant.reviews.contains(review1));
+        assertTrue(testRestaurant.reviews.contains(review2));
+        assertEquals(testRestaurant, testReview.place);
+        assertEquals(testRestaurant, review1.place);
+        assertEquals(testRestaurant, review2.place);
+        testRestaurant.addReview(review2);
+        assertEquals("Restaurant Name Is: BBQ\n" +
+                "Restaurant Rate Is: 3.0\n" +
+                "Restaurant Price Category Is: $$$\n" +
+                "6", testRestaurant.toString());
+    }
+    @Test
+    public void testConstructors() {
+        Review reviewWithRestaurant = new Review("amazing place", "Naseem", 5, testRestaurant);
+
+        assertEquals("The review should have a body that matches what the constructor was given", "amazing place", reviewWithRestaurant.body);
+        assertEquals("The review should similarly contain the given author", "Naseem", reviewWithRestaurant.author);
+        assertEquals("It should also contain the number of stars", 5, reviewWithRestaurant.stars);
+
+        //New Things that should happen
+        assertEquals("Should also contain a reference to the restaurant it's for", testRestaurant, reviewWithRestaurant.place);
+        assertEquals("Calling to String should include the restaurants name", "Author: Naseem\nPlace: BBQ\nStars: 5\nReview: amazing place", reviewWithRestaurant.toString());
+        assertEquals("Should cause the restaurants stars to change", 3.0, testRestaurant.stars, 0.0);
+        assertEquals("Should cause the restaurants review count to change", 3, testRestaurant.reviews.size());
+
+    }
+//    @Test
+//    public void testConstructorWithMovie() {
+//        Review reviewMovie = new Review("nice movie", "Hala", 5, theater, "12 angry men");
+//        assertEquals("12 angry men", reviewMovie.movie);
+//        assertEquals(theater, reviewMovie.place);
 //    }
+    @Test
+    public void testShopConstructor() {
+        assertNotNull( test);
+        assertEquals("pretty", test.name);
+        assertEquals("gift store", test.description);
+        assertEquals("$$", test.priceCategory);
+        assertEquals(0, test.stars, 0.0);
+        assertEquals( 0, test.reviews.size());
+    }
+    @Test
+    public void testAddReviews() {
+        test.addReview(rev);
 
-@Test
-    public void testReview(){
-//        //review
-    Review review1=new Review();
-    review1.stars=7;
-    review1.author="groot";
-    review1.toString();
-//    System.out.println(review1.toString());
-//    assertEquals("Restaurant New Given  Rate Is: 7\n" +
-//            "Reviewed by : groot",review1.toString() );
-    assertEquals("Restaurant New Given  Rate Is: 7\n" +
-            "Reviewed by : groot\n",review1.toString());
-    assertTrue(true);
+        assertEquals(3, test.stars, 0.0);
+        assertEquals( 1, test.reviews.size());
+        assertTrue(test.reviews.contains(rev));
+        assertEquals( test, rev.place);
+    }
+    @Test
+    public void testAddReviewMultiple() {
+        Review secondReview = new Review("coool", "Ola", 1, test);
+        Review thirdReview = new Review("WooooW!!", "Noor", 5, test);
+
+        test.addReview(rev);
+        test.addReview(secondReview);
+        test.addReview(thirdReview);
+        assertEquals(3.0, test.stars, 0.0);
+        assertEquals(5, test.reviews.size());
+
+        assertTrue( test.reviews.contains(rev));
+        assertTrue( test.reviews.contains(secondReview));
+        assertEquals( test, rev.place);
+        assertEquals(test, secondReview.place);
+        assertEquals( test, thirdReview.place);
+        assertEquals( "Shop{name='pretty', stars=3.0, priceCategory='$$', description='gift store'}", test.toString());
+    }
+
+
 }
 
-@Test
-public void testShop(){
-Shop shop1=new Shop("classy","gift shop","$$$");
-    System.out.println(shop1.toString());
-//    assertTrue(true);
-    assertEquals("Shop Name Is: classy\n" +
-            "Description: gift shop\n" +
-            "Shop Price Category Is: $$$\n",shop1.toString());
-        }
-        @Test
-    public void testTheater(){
-            ArrayList<String>theaterList=new ArrayList<>();
-            Theater theater=new Theater("My PC",theaterList);
 
-            theaterList.add("12 angry men");
-            theaterList.add("pay it forward");
-            theater.addMovie("Beautiful Mind");
-            theater.addMovie("Bee");
-            theater.removeMovie("pay it forward");
-            theater.toString();
-            System.out.println(theater.toString());
-//            assertEquals("[12 angry men, pay it forward, Beautiful Mind, Bee]",theater.toString());
-//            assertEquals("[12 angry men, Beautiful Mind, Bee]",theater.toString());
-
-            assertTrue(true);
-        }
-        @Test
-    public void testMoviesReview(){
-            ArrayList<String>theaterList=new ArrayList<>();
-            Theater theater=new Theater("My PC",theaterList);
-            theaterList.add("12 angry men");
-            theaterList.add("pay it forward");
-            theater.addMovie("Beautiful Mind");
-            theater.removeMovie("pay it forward");
-//            theater.addReview("groot",8,"Bee");
-//            assertEquals("Bee Has A New Review : Bee Has a New Review From groot\n" +
-//                    "Rate is: 8",theater.addReview("groot",8,"Bee"));
-            assertTrue(true);
-
-
-        }
-}
